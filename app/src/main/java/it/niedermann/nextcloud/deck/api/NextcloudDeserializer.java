@@ -8,6 +8,7 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 
 import it.niedermann.nextcloud.deck.DeckLog;
+import it.niedermann.nextcloud.deck.exceptions.DeckException;
 
 /**
  * Created by david on 24.05.17.
@@ -27,7 +28,10 @@ public class NextcloudDeserializer<T> implements JsonDeserializer<T> {
     @Override
     public T deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) throws JsonParseException {
         DeckLog.verbose(json.toString());
-        return JsonToEntityParser.parseJsonObject(json.getAsJsonObject(), mType);
-
+        try {
+            return JsonToEntityParser.parseJsonObject(json.getAsJsonObject(), mType);
+        } catch (Exception e){
+            throw new DeckException(DeckException.Hint.CAPABILITIES_NOT_PARSABLE, "(@dtcg: please remove any sensitive data!) Some Malformed stuff here : " + json.getAsString());
+        }
     }
 }
