@@ -11,7 +11,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
 
 import static it.niedermann.nextcloud.deck.ui.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
-import static it.niedermann.nextcloud.deck.ui.branding.BrandingUtil.readBrandMainColor;
+import static it.niedermann.nextcloud.deck.ui.branding.BrandingUtil.readBrandAccountColor;
 
 public class BrandedPreferenceCategory extends PreferenceCategory {
 
@@ -21,7 +21,7 @@ public class BrandedPreferenceCategory extends PreferenceCategory {
         final View v = holder.itemView.findViewById(android.R.id.title);
         @Nullable final Context context = getContext();
         if (context != null && v instanceof TextView) {
-            @ColorInt final int mainColor = getSecondaryForegroundColorDependingOnTheme(context, readBrandMainColor(context));
+            @ColorInt final int mainColor = getSecondaryForegroundColorDependingOnTheme(context, readBrandAccountColor(context));
             ((TextView) v).setTextColor(mainColor);
         }
     }

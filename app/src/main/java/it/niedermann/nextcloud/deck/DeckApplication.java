@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.multidex.MultiDexApplication;
 import androidx.preference.PreferenceManager;
 
+import it.niedermann.nextcloud.deck.model.Account;
+
 import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
 
 public class DeckApplication extends MultiDexApplication {
@@ -66,10 +68,11 @@ public class DeckApplication extends MultiDexApplication {
     // Current account / board / stack states
     // --------------------------------------
 
-    public static void saveCurrentAccountId(@NonNull Context context, long accountId) {
+    public static void saveCurrentAccountId(@NonNull Context context, @NonNull Account account) {
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        DeckLog.log("--- Write: shared_preference_last_account" + " | " + accountId);
-        editor.putLong(context.getString(R.string.shared_preference_last_account), accountId);
+        DeckLog.log("--- Write: shared_preference_last_account" + " | " + account.getId());
+        editor.putLong(context.getString(R.string.shared_preference_last_account), account.getId());
+        editor.putInt(context.getString(R.string.shared_preference_color_account), account.getColor());
         editor.apply();
     }
 

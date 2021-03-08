@@ -239,7 +239,7 @@ public class MainActivity extends BrandedActivity implements DeleteStackListener
                 SingleAccountHelper.setCurrentAccount(getApplicationContext(), mainViewModel.getCurrentAccount().getName());
                 mainViewModel.recreateSyncManager();
 
-                saveCurrentAccountId(this, mainViewModel.getCurrentAccount().getId());
+                saveCurrentAccountId(this, mainViewModel.getCurrentAccount());
                 if (mainViewModel.getCurrentAccount().isMaintenanceEnabled()) {
                     refreshCapabilities(mainViewModel.getCurrentAccount());
                 }

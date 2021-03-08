@@ -32,10 +32,17 @@ public abstract class BrandingUtil {
     }
 
     @ColorInt
+    public static int readBrandAccountColor(@NonNull Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        DeckLog.log("--- Read: shared_preference_color_account");
+        return sharedPreferences.getInt(context.getString(R.string.shared_preference_color_account), context.getApplicationContext().getResources().getColor(R.color.accent));
+    }
+
+    @ColorInt
     public static int readBrandMainColor(@NonNull Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         DeckLog.log("--- Read: shared_preference_theme_main");
-        return sharedPreferences.getInt(context.getString(R.string.shared_preference_theme_main), context.getApplicationContext().getResources().getColor(R.color.defaultBrand));
+        return sharedPreferences.getInt(context.getString(R.string.shared_preference_theme_main), context.getApplicationContext().getResources().getColor(R.color.accent));
     }
 
     public static void saveBrandColors(@NonNull Context context, @ColorInt int mainColor) {

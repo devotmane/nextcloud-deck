@@ -37,7 +37,7 @@ public class PrepareCreateActivity extends PickStackActivity {
             startActivity(EditActivity.createNewCardIntent(this, account, boardId, stackId, receivedClipData));
         }
 
-        saveCurrentAccountId(this, account.getId());
+        saveCurrentAccountId(this, account);
         saveCurrentBoardId(this, account.getId(), boardId);
         saveCurrentStackId(this, account.getId(), boardId, stackId);
         applyBrand(account.getColor());

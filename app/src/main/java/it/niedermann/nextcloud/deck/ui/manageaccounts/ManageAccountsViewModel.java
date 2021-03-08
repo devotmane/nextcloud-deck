@@ -36,7 +36,7 @@ public class ManageAccountsViewModel extends AndroidViewModel {
     public void setNewAccount(@NonNull Account account) {
         SingleAccountHelper.setCurrentAccount(getApplication(), account.getName());
         syncManager = new SyncManager(getApplication());
-        saveCurrentAccountId(getApplication(), account.getId());
+        saveCurrentAccountId(getApplication(), account);
     }
 
     public void deleteAccount(long id) {
