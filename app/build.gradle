@@ -65,6 +65,9 @@ dependencies {
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
+    // Utils
+    implementation 'com.github.stefan-niedermann.android-commons:shared-preferences:0.2.0'
+
     // Android X
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.camera:camera-camera2:1.1.0-alpha02'

@@ -110,6 +110,15 @@ public class CardDetailsFragment extends BrandedFragment implements OnDateSetLis
         setupDescription();
         setupProjects();
 
+        boardColor$.observe(getViewLifecycleOwner(), (color) -> {
+            applyBrandToEditText(color, binding.labels);
+            applyBrandToEditText(color, binding.dueDateDate);
+            applyBrandToEditText(color, binding.dueDateTime);
+            applyBrandToEditText(color, binding.people);
+            binding.descriptionEditor.setSearchColor(color);
+            binding.descriptionViewer.setSearchColor(color);
+        });
+
         return binding.getRoot();
     }
 
@@ -127,16 +136,6 @@ public class CardDetailsFragment extends BrandedFragment implements OnDateSetLis
     @Override
     public void onPause() {
         super.onPause();
-    }
-
-    @Override
-    public void applyBrand(int mainColor) {
-        applyBrandToEditText(mainColor, binding.labels);
-        applyBrandToEditText(mainColor, binding.dueDateDate);
-        applyBrandToEditText(mainColor, binding.dueDateTime);
-        applyBrandToEditText(mainColor, binding.people);
-        binding.descriptionEditor.setSearchColor(mainColor);
-        binding.descriptionViewer.setSearchColor(mainColor);
     }
 
     private void setupDescription() {

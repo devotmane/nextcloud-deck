@@ -86,6 +86,11 @@ public class MoveCardDialogFragment extends BrandedDialogFragment implements Pic
             dismiss();
         });
         binding.cancel.setOnClickListener((v) -> dismiss());
+        boardColor$.observe(getViewLifecycleOwner(), (color) -> {
+            final ColorStateList mainColorStateList = ColorStateList.valueOf(BrandingUtil.getSecondaryForegroundColorDependingOnTheme(requireContext(), color));
+            binding.cancel.setTextColor(mainColorStateList);
+            binding.submit.setTextColor(mainColorStateList);
+        });
         return binding.getRoot();
     }
 
@@ -109,13 +114,6 @@ public class MoveCardDialogFragment extends BrandedDialogFragment implements Pic
             binding.submit.setEnabled(true);
             binding.moveWarning.setVisibility(originCardHasAttachmentsOrComments && !board.getLocalId().equals(originBoardLocalId) ? VISIBLE : GONE);
         }
-    }
-
-    @Override
-    public void applyBrand(int mainColor) {
-        final ColorStateList mainColorStateList = ColorStateList.valueOf(BrandingUtil.getSecondaryForegroundColorDependingOnTheme(requireContext(), mainColor));
-        binding.cancel.setTextColor(mainColorStateList);
-        binding.submit.setTextColor(mainColorStateList);
     }
 
     public static DialogFragment newInstance(long originAccountId, long originBoardLocalId, String originCardTitle, Long originCardLocalId, boolean hasAttachmentsOrComments) {

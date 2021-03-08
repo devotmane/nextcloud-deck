@@ -50,6 +50,12 @@ public class ShareProgressDialogFragment extends BrandedDialogFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        boardColor$.observe(getViewLifecycleOwner(), (color) -> {
+            binding.progress.getProgressDrawable().setColorFilter(
+                    getSecondaryForegroundColorDependingOnTheme(requireContext(), color), Mode.SRC_IN);
+            binding.errorReportButton.setTextColor(getSecondaryForegroundColorDependingOnTheme(requireContext(), color));
+        });
+
         viewModel.getMax().observe(requireActivity(), (nextMax) -> binding.progress.setMax(nextMax));
 
         viewModel.getProgress().observe(requireActivity(), (progress) -> {
@@ -112,12 +118,5 @@ public class ShareProgressDialogFragment extends BrandedDialogFragment {
 
     public static ShareProgressDialogFragment newInstance() {
         return new ShareProgressDialogFragment();
-    }
-
-    @Override
-    public void applyBrand(int mainColor) {
-        binding.progress.getProgressDrawable().setColorFilter(
-                getSecondaryForegroundColorDependingOnTheme(requireContext(), mainColor), Mode.SRC_IN);
-        binding.errorReportButton.setTextColor(getSecondaryForegroundColorDependingOnTheme(requireContext(), mainColor));
     }
 }

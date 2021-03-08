@@ -191,6 +191,20 @@ public class MainActivity extends BrandedActivity implements DeleteStackListener
         binding.navigationView.setNavigationItemSelectedListener(this);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        accountColor$.observe(this, (color) -> {
+            headerBinding.headerView.setBackgroundColor(color);
+            @ColorInt final int headerTextColor = contrastRatioIsSufficientBigAreas(color, Color.WHITE) ? Color.WHITE : Color.BLACK;
+            DrawableCompat.setTint(headerBinding.logo.getDrawable(), headerTextColor);
+            headerBinding.appName.setTextColor(headerTextColor);
+        });
+        boardColor$.observe(this, (color) -> {
+            applyBrandToPrimaryTabLayout(color, binding.stackTitles);
+            applyBrandToFAB(color, binding.fab);
+            // TODO We assume, that the background of the spinner is always white
+            binding.swipeRefreshLayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, color) ? color : DeckApplication.isDarkTheme(this) ? Color.DKGRAY : colorAccent);
+            DrawableCompat.setTint(binding.filterIndicator.getDrawable(), getSecondaryForegroundColorDependingOnTheme(this, color));
+        });
+
         switchMap(mainViewModel.hasAccounts(), hasAccounts -> {
             if (hasAccounts) {
                 return mainViewModel.readAccounts();
@@ -404,19 +418,6 @@ public class MainActivity extends BrandedActivity implements DeleteStackListener
         binding.accountSwitcher.setOnClickListener((v) -> AccountSwitcherDialog.newInstance()
                 .show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName()));
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    }
-
-    @Override
-    public void applyBrand(@ColorInt int mainColor) {
-        applyBrandToPrimaryTabLayout(mainColor, binding.stackTitles);
-        applyBrandToFAB(mainColor, binding.fab);
-        // TODO We assume, that the background of the spinner is always white
-        binding.swipeRefreshLayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, mainColor) ? mainColor : DeckApplication.isDarkTheme(this) ? Color.DKGRAY : colorAccent);
-        headerBinding.headerView.setBackgroundColor(mainColor);
-        @ColorInt final int headerTextColor = contrastRatioIsSufficientBigAreas(mainColor, Color.WHITE) ? Color.WHITE : Color.BLACK;
-        DrawableCompat.setTint(headerBinding.logo.getDrawable(), headerTextColor);
-        headerBinding.appName.setTextColor(headerTextColor);
-        DrawableCompat.setTint(binding.filterIndicator.getDrawable(), getSecondaryForegroundColorDependingOnTheme(this, mainColor));
     }
 
     @Override

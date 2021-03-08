@@ -41,6 +41,8 @@ public class AboutActivity extends BrandedActivity {
         setSupportActionBar(binding.toolbar);
         binding.viewPager.setAdapter(new TabsPagerAdapter(this, (Account) getIntent().getSerializableExtra(BUNDLE_KEY_ACCOUNT)));
         new TabLayoutMediator(binding.tabLayout, binding.viewPager, (tab, position) -> tab.setText(tabTitles[position])).attach();
+
+        accountColor$.observe(this, (color) -> applyBrandToPrimaryTabLayout(color, binding.tabLayout));
     }
 
     private static class TabsPagerAdapter extends FragmentStateAdapter {
@@ -78,11 +80,6 @@ public class AboutActivity extends BrandedActivity {
     public boolean onSupportNavigateUp() {
         finish(); // close this activity as oppose to navigating up
         return true;
-    }
-
-    @Override
-    public void applyBrand(int mainColor) {
-        applyBrandToPrimaryTabLayout(mainColor, binding.tabLayout);
     }
 
     @NonNull

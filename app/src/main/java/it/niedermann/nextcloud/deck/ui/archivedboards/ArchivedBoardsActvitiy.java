@@ -75,11 +75,6 @@ public class ArchivedBoardsActvitiy extends BrandedActivity implements DeleteBoa
 
     }
 
-    @Override
-    public void applyBrand(int mainColor) {
-        // Nothing to do...
-    }
-
     @NonNull
     public static Intent createIntent(@NonNull Context context, @NonNull Account account) {
         return new Intent(context, ArchivedBoardsActvitiy.class)

@@ -60,6 +60,14 @@ public class TakePhotoActivity extends BrandedActivity {
 
         setContentView(binding.getRoot());
 
+        brandedViews = new View[]{binding.takePhoto, binding.switchCamera, binding.toggleTorch};
+        boardColor$.observe(this, (color) -> {
+            final ColorStateList colorStateList = ColorStateList.valueOf(color);
+            for (View v : brandedViews) {
+                v.setBackgroundTintList(colorStateList);
+            }
+        });
+
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         cameraProviderFuture.addListener(() -> {
             try {
@@ -83,8 +91,6 @@ public class TakePhotoActivity extends BrandedActivity {
                 finish();
             }
         }, ContextCompat.getMainExecutor(this));
-
-        brandedViews = new View[]{binding.takePhoto, binding.switchCamera, binding.toggleTorch};
     }
 
     private ImageCapture getCaptureUseCase() {
@@ -168,11 +174,4 @@ public class TakePhotoActivity extends BrandedActivity {
         return new Intent(context, TakePhotoActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
     }
 
-    @Override
-    public void applyBrand(int mainColor) {
-        final ColorStateList colorStateList = ColorStateList.valueOf(mainColor);
-        for (View v : brandedViews) {
-            v.setBackgroundTintList(colorStateList);
-        }
-    }
 }

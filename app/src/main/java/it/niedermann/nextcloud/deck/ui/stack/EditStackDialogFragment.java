@@ -61,6 +61,8 @@ public class EditStackDialogFragment extends BrandedDialogFragment {
             builder.setTitle(R.string.rename_list)
                     .setPositiveButton(R.string.simple_rename, (dialog, which) -> editStackListener.onUpdateStack(stackId, binding.input.getText().toString()));
         }
+
+        boardColor$.observe(getViewLifecycleOwner(), (color) -> applyBrandToEditText(color, binding.input));
         return builder.create();
     }
 
@@ -87,10 +89,5 @@ public class EditStackDialogFragment extends BrandedDialogFragment {
         dialog.setArguments(args);
 
         return dialog;
-    }
-
-    @Override
-    public void applyBrand(int mainColor) {
-        applyBrandToEditText(mainColor, binding.input);
     }
 }

@@ -91,8 +91,8 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
         return new AccountSwitcherDialog();
     }
 
-    @Override
-    public void applyBrand(int mainColor) {
+//    @Override
+//    public void applyBrand(int mainColor) {
 //        applyBrandToLayerDrawable((LayerDrawable) binding.check.getDrawable(), R.id.area, mainColor);
-    }
+//    }
 }

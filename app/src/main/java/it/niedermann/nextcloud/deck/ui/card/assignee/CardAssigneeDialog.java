@@ -102,10 +102,6 @@ public class CardAssigneeDialog extends BrandedDialogFragment {
         binding.title.setText(user.getDisplayname());
     }
 
-    @Override
-    public void applyBrand(int mainColor) {
-    }
-
     public static DialogFragment newInstance(@NonNull User user) {
         final DialogFragment fragment = new CardAssigneeDialog();
         final Bundle args = new Bundle();

@@ -89,6 +89,13 @@ public class FilterDialogFragment extends BrandedDialogFragment {
         });
         filterViewModel.createFilterInformationDraft();
 
+        boardColor$.observe(getViewLifecycleOwner(), (mainColor) -> {
+            @ColorInt final int finalMainColor = getSecondaryForegroundColorDependingOnTheme(binding.tabLayout.getContext(), mainColor);
+            final boolean contrastRatioIsSufficient = ColorUtil.INSTANCE.getContrastRatio(mainColor, ContextCompat.getColor(binding.tabLayout.getContext(), R.color.primary)) > 1.7d;
+            binding.tabLayout.setSelectedTabIndicatorColor(contrastRatioIsSufficient ? mainColor : finalMainColor);
+            indicator.setColorFilter(contrastRatioIsSufficient ? mainColor : finalMainColor, PorterDuff.Mode.SRC_ATOP);
+        });
+
         return dialogBuilder
                 .setTitle(R.string.simple_filter)
                 .setView(binding.getRoot())
@@ -100,14 +107,6 @@ public class FilterDialogFragment extends BrandedDialogFragment {
 
     public static DialogFragment newInstance() {
         return new FilterDialogFragment();
-    }
-
-    @Override
-    public void applyBrand(int mainColor) {
-        @ColorInt final int finalMainColor = getSecondaryForegroundColorDependingOnTheme(binding.tabLayout.getContext(), mainColor);
-        final boolean contrastRatioIsSufficient = ColorUtil.INSTANCE.getContrastRatio(mainColor, ContextCompat.getColor(binding.tabLayout.getContext(), R.color.primary)) > 1.7d;
-        binding.tabLayout.setSelectedTabIndicatorColor(contrastRatioIsSufficient ? mainColor : finalMainColor);
-        indicator.setColorFilter(contrastRatioIsSufficient ? mainColor : finalMainColor, PorterDuff.Mode.SRC_ATOP);
     }
 
     private static class TabsPagerAdapter extends FragmentStateAdapter {

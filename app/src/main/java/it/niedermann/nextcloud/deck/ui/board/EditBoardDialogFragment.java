@@ -73,6 +73,8 @@ public class EditBoardDialogFragment extends BrandedDialogFragment {
             binding.colorChooser.selectColor(ContextCompat.getColor(requireContext(), R.color.board_default_color));
         }
 
+        boardColor$.observe(getViewLifecycleOwner(), (color) -> applyBrandToEditText(color, binding.input));
+
         return dialogBuilder
                 .setView(binding.getRoot())
                 .setNeutralButton(android.R.string.cancel, null)
@@ -93,10 +95,5 @@ public class EditBoardDialogFragment extends BrandedDialogFragment {
 
     public static DialogFragment newInstance() {
         return newInstance(null);
-    }
-
-    @Override
-    public void applyBrand(int mainColor) {
-        applyBrandToEditText(mainColor, binding.input);
     }
 }

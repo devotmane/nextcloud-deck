@@ -121,6 +121,8 @@ public class StackFragment extends BrandedFragment implements DragAndDropTab<Car
             cardsLiveData.observe(getViewLifecycleOwner(), cardsObserver);
         }));
 
+        boardColor$.observe(getViewLifecycleOwner(), (color) -> this.adapter.applyBrand(color));
+
         return binding.getRoot();
     }
 
@@ -133,13 +135,6 @@ public class StackFragment extends BrandedFragment implements DragAndDropTab<Car
     @Override
     public RecyclerView getRecyclerView() {
         return binding.recyclerView;
-    }
-
-    @Override
-    public void applyBrand(int mainColor) {
-        if (this.adapter != null) {
-            this.adapter.applyBrand(mainColor);
-        }
     }
 
     public static Fragment newInstance(long stackId) {

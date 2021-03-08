@@ -67,11 +67,6 @@ public class CardProjectResourcesDialog extends BrandedDialogFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    @Override
-    public void applyBrand(int mainColor) {
-
-    }
-
     public static DialogFragment newInstance(@Nullable String projectName, @NonNull List<OcsProjectResource> resources) {
         final DialogFragment fragment = new CardProjectResourcesDialog();
         final Bundle args = new Bundle();

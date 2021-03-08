@@ -24,13 +24,11 @@ import it.niedermann.nextcloud.deck.databinding.ItemAccessControlOwnerBinding;
 import it.niedermann.nextcloud.deck.model.AccessControl;
 import it.niedermann.nextcloud.deck.model.Account;
 import it.niedermann.nextcloud.deck.model.enums.DBStatus;
-import it.niedermann.nextcloud.deck.ui.branding.Branded;
 import it.niedermann.nextcloud.deck.util.ViewUtil;
 
 import static it.niedermann.nextcloud.deck.ui.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
-import static it.niedermann.nextcloud.deck.ui.branding.BrandingUtil.isBrandingEnabled;
 
-public class AccessControlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Branded {
+public class AccessControlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public static final long HEADER_ITEM_LOCAL_ID = -1L;
     private static final int TYPE_HEADER = 0;
@@ -123,13 +121,11 @@ public class AccessControlAdapter extends RecyclerView.Adapter<RecyclerView.View
                     accessControlChangedListener.updateAccessControl(ac);
                 });
 
-                if (isBrandingEnabled(context)) {
-                    if (hasManagePermission) {
-                        brandSwitch(context, acHolder.binding.permissionEdit, mainColor);
-                        brandSwitch(context, acHolder.binding.permissionManage, mainColor);
-                    }
-                    brandSwitch(context, acHolder.binding.permissionShare, mainColor);
+                if (hasManagePermission) {
+                    brandSwitch(context, acHolder.binding.permissionEdit, mainColor);
+                    brandSwitch(context, acHolder.binding.permissionManage, mainColor);
                 }
+                brandSwitch(context, acHolder.binding.permissionShare, mainColor);
                 break;
             }
         }
@@ -159,12 +155,9 @@ public class AccessControlAdapter extends RecyclerView.Adapter<RecyclerView.View
         notifyDataSetChanged();
     }
 
-    @Override
     public void applyBrand(int mainColor) {
-        if (isBrandingEnabled(context)) {
-            this.mainColor = getSecondaryForegroundColorDependingOnTheme(context, mainColor);
-            notifyDataSetChanged();
-        }
+        this.mainColor = getSecondaryForegroundColorDependingOnTheme(context, mainColor);
+        notifyDataSetChanged();
     }
 
     /**

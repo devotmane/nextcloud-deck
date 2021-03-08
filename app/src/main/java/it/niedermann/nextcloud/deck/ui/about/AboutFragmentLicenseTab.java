@@ -33,15 +33,15 @@ public class AboutFragmentLicenseTab extends BrandedFragment {
         setTextWithURL(binding.aboutIconsDisclaimerAppIcon, getResources(), R.string.about_icons_disclaimer_app_icon, R.string.about_app_icon_author_link_label, R.string.url_about_icon_author);
         setTextWithURL(binding.aboutIconsDisclaimerMdiIcons, getResources(), R.string.about_icons_disclaimer_mdi_icons, R.string.about_icons_disclaimer_mdi, R.string.url_about_icons_disclaimer_mdi);
         binding.aboutAppLicenseButton.setOnClickListener((v) -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_license)))));
-        return binding.getRoot();
-    }
 
-    @Override
-    public void applyBrand(int mainColor) {
-        @ColorInt final int finalMainColor = contrastRatioIsSufficientBigAreas(mainColor, ContextCompat.getColor(requireContext(), R.color.primary))
-                ? mainColor
-                : isDarkTheme(requireContext()) ? Color.WHITE : Color.BLACK;
-        DrawableCompat.setTintList(binding.aboutAppLicenseButton.getBackground(), ColorStateList.valueOf(finalMainColor));
-        binding.aboutAppLicenseButton.setTextColor(ColorUtil.INSTANCE.getForegroundColorForBackgroundColor(finalMainColor));
+        accountColor$.observe(getViewLifecycleOwner(), (color) -> {
+            @ColorInt final int finalMainColor = contrastRatioIsSufficientBigAreas(color, ContextCompat.getColor(requireContext(), R.color.primary))
+                    ? color
+                    : isDarkTheme(requireContext()) ? Color.WHITE : Color.BLACK;
+            DrawableCompat.setTintList(binding.aboutAppLicenseButton.getBackground(), ColorStateList.valueOf(finalMainColor));
+            binding.aboutAppLicenseButton.setTextColor(ColorUtil.INSTANCE.getForegroundColorForBackgroundColor(finalMainColor));
+        });
+
+        return binding.getRoot();
     }
 }

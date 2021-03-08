@@ -123,6 +123,10 @@ public class CardCommentsFragment extends BrandedFragment implements CommentEdit
         } else {
             binding.addCommentLayout.setVisibility(GONE);
         }
+        boardColor$.observe(getViewLifecycleOwner(), (color) -> {
+            applyBrandToEditText(color, binding.message);
+            applyBrandToFAB(color, binding.fab);
+        });
         return binding.getRoot();
     }
 
@@ -148,12 +152,6 @@ public class CardCommentsFragment extends BrandedFragment implements CommentEdit
                 ExceptionDialogFragment.newInstance(deleteLiveData.getError(), mainViewModel.getAccount()).show(getChildFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
             }
         });
-    }
-
-    @Override
-    public void applyBrand(int mainColor) {
-        applyBrandToEditText(mainColor, binding.message);
-        applyBrandToFAB(mainColor, binding.fab);
     }
 
     @Override

@@ -34,7 +34,6 @@ import it.niedermann.nextcloud.deck.model.full.FullCard;
 import it.niedermann.nextcloud.deck.persistence.sync.SyncManager;
 import it.niedermann.nextcloud.deck.persistence.sync.adapters.db.util.WrappedLiveData;
 import it.niedermann.nextcloud.deck.ui.MainViewModel;
-import it.niedermann.nextcloud.deck.ui.branding.Branded;
 import it.niedermann.nextcloud.deck.ui.exception.ExceptionDialogFragment;
 import it.niedermann.nextcloud.deck.ui.movecard.MoveCardDialogFragment;
 import it.niedermann.nextcloud.deck.util.CardUtil;
@@ -44,7 +43,7 @@ import static it.niedermann.nextcloud.deck.persistence.sync.adapters.db.util.Liv
 import static it.niedermann.nextcloud.deck.ui.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.nextcloud.deck.util.MimeTypeUtil.TEXT_PLAIN;
 
-public class CardAdapter extends RecyclerView.Adapter<AbstractCardViewHolder> implements DragAndDropAdapter<FullCard>, CardOptionsItemSelectedListener, Branded {
+public class CardAdapter extends RecyclerView.Adapter<AbstractCardViewHolder> implements DragAndDropAdapter<FullCard>, CardOptionsItemSelectedListener {
 
     private final boolean compactMode;
     @NonNull
@@ -175,7 +174,6 @@ public class CardAdapter extends RecyclerView.Adapter<AbstractCardViewHolder> im
         notifyDataSetChanged();
     }
 
-    @Override
     public void applyBrand(int mainColor) {
         this.mainColor = getSecondaryForegroundColorDependingOnTheme(context, mainColor);
         notifyDataSetChanged();

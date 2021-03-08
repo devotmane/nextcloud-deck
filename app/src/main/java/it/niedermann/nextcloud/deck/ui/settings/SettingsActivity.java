@@ -37,11 +37,6 @@ public class SettingsActivity extends BrandedActivity {
         return true;
     }
 
-    @Override
-    public void applyBrand(int mainColor) {
-        // Nothing to do...
-    }
-
     @NonNull
     public static Intent createIntent(@NonNull Context context) {
         return new Intent(context, SettingsActivity.class);

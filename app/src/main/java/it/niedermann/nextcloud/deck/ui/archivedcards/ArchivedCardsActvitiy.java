@@ -72,11 +72,6 @@ public class ArchivedCardsActvitiy extends BrandedActivity {
 
     }
 
-    @Override
-    public void applyBrand(int mainColor) {
-        // Nothing to do...
-    }
-
     @NonNull
     public static Intent createIntent(@NonNull Context context, @NonNull Account account, long boardId, boolean currentBoardHasEditPermission) {
         return new Intent(context, ArchivedCardsActvitiy.class)

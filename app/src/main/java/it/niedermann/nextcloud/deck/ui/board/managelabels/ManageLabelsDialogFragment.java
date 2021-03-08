@@ -99,17 +99,16 @@ public class ManageLabelsDialogFragment extends BrandedDialogFragment implements
             });
         });
         binding.addLabelTitle.setOnEditorActionListener((v, actionId, event) -> binding.fab.performClick());
+
+        boardColor$.observe(getViewLifecycleOwner(), (color) -> {
+            applyBrandToFAB(color, binding.fab);
+            applyBrandToEditText(color, binding.addLabelTitle);
+        });
         return dialogBuilder
                 .setTitle(R.string.manage_tags)
                 .setView(binding.getRoot())
                 .setPositiveButton(R.string.simple_close, null)
                 .create();
-    }
-
-    @Override
-    public void applyBrand(int mainColor) {
-        applyBrandToFAB(mainColor, binding.fab);
-        applyBrandToEditText(mainColor, binding.addLabelTitle);
     }
 
     public static DialogFragment newInstance(long boardLocalId) {

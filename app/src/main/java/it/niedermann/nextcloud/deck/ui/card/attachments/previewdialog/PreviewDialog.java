@@ -86,10 +86,6 @@ public class PreviewDialog extends BrandedDialogFragment {
     }
 
     @Override
-    public void applyBrand(int mainColor) {
-    }
-
-    @Override
     public void onDestroy() {
         this.imageBuilder$.removeObservers(requireActivity());
         this.title$.removeObservers(requireActivity());

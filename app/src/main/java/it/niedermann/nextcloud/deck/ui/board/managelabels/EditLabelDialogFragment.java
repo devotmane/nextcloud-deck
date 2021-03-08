@@ -67,6 +67,8 @@ public class EditLabelDialogFragment extends BrandedDialogFragment {
         binding.input.setSelection(title.length());
         binding.colorChooser.selectColor(this.label.getColor());
 
+        boardColor$.observe(getViewLifecycleOwner(), (color) -> applyBrandToEditText(color, binding.input));
+
         return dialogBuilder
                 .setView(binding.getRoot())
                 .setNeutralButton(android.R.string.cancel, null)
@@ -81,10 +83,5 @@ public class EditLabelDialogFragment extends BrandedDialogFragment {
         dialog.setArguments(args);
 
         return dialog;
-    }
-
-    @Override
-    public void applyBrand(int mainColor) {
-        applyBrandToEditText(mainColor, binding.input);
     }
 }

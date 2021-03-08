@@ -50,6 +50,8 @@ public class CardCommentsEditDialogFragment extends BrandedDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         binding = DialogAddCommentBinding.inflate(requireActivity().getLayoutInflater());
 
+        boardColor$.observe(getViewLifecycleOwner(), (color) -> applyBrandToEditText(color, binding.input));
+
         return new BrandedAlertDialogBuilder(requireActivity())
                 .setView(binding.getRoot())
                 .setTitle(R.string.simple_comment)
@@ -76,11 +78,6 @@ public class CardCommentsEditDialogFragment extends BrandedDialogFragment {
         DialogFragment fragment = new CardCommentsEditDialogFragment();
         fragment.setArguments(bundle);
         return fragment;
-    }
-
-    @Override
-    public void applyBrand(int mainColor) {
-        applyBrandToEditText(mainColor, binding.input);
     }
 }
 

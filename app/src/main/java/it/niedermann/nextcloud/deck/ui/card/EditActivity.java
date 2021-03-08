@@ -34,7 +34,6 @@ import it.niedermann.nextcloud.deck.util.CardUtil;
 
 import static it.niedermann.nextcloud.deck.persistence.sync.adapters.db.util.LiveDataHelper.observeOnce;
 import static it.niedermann.nextcloud.deck.ui.branding.BrandingUtil.applyBrandToPrimaryTabLayout;
-import static it.niedermann.nextcloud.deck.ui.branding.BrandingUtil.isBrandingEnabled;
 
 public class EditActivity extends BrandedActivity {
     private static final String BUNDLE_KEY_ACCOUNT = "account";
@@ -83,6 +82,8 @@ public class EditActivity extends BrandedActivity {
 
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+
+        boardColor$.observe(this, this::applyBrand);
 
         loadDataFromIntent();
     }
@@ -295,17 +296,14 @@ public class EditActivity extends BrandedActivity {
         super.finish();
     }
 
-    @Override
     public void applyBrand(int mainColor) {
-        if (isBrandingEnabled(this)) {
-            final Drawable navigationIcon = binding.toolbar.getNavigationIcon();
-            if (navigationIcon == null) {
-                DeckLog.error("Expected navigationIcon to be present.");
-            } else {
-                DrawableCompat.setTint(binding.toolbar.getNavigationIcon(), colorAccent);
-            }
-            applyBrandToPrimaryTabLayout(mainColor, binding.tabLayout);
+        final Drawable navigationIcon = binding.toolbar.getNavigationIcon();
+        if (navigationIcon == null) {
+            DeckLog.error("Expected navigationIcon to be present.");
+        } else {
+            DrawableCompat.setTint(binding.toolbar.getNavigationIcon(), colorAccent);
         }
+        applyBrandToPrimaryTabLayout(mainColor, binding.tabLayout);
     }
 
     @NonNull

@@ -142,7 +142,6 @@ public class AccessControlDialogFragment extends BrandedDialogFragment implement
         userAutoCompleteAdapter.exclude(user);
     }
 
-    @Override
     public void applyBrand(int mainColor) {
         applyBrandToEditText(mainColor, binding.people);
         this.adapter.applyBrand(mainColor);

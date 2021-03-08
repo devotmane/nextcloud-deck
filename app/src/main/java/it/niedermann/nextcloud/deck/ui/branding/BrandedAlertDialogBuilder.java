@@ -12,7 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import static it.niedermann.nextcloud.deck.ui.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.nextcloud.deck.ui.branding.BrandingUtil.readBrandMainColor;
 
-public class BrandedAlertDialogBuilder extends AlertDialog.Builder implements Branded {
+public class BrandedAlertDialogBuilder extends AlertDialog.Builder {
 
     protected AlertDialog dialog;
 
@@ -33,7 +33,6 @@ public class BrandedAlertDialogBuilder extends AlertDialog.Builder implements Br
     }
 
     @CallSuper
-    @Override
     public void applyBrand(int mainColor) {
         final Button[] buttons = new Button[3];
         buttons[0] = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
